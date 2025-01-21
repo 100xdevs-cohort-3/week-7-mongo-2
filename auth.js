@@ -4,15 +4,14 @@ const JWT_SECRET = "s3cret";
 function auth(req, res, next) {
     const token = req.headers.authorization;
 
-    const response = jwt.verify(token, JWT_SECRET);
-
-    if (response) {
-        req.userId = token.userId;
+    try {
+        const response = jwt.verify(token, JWT_SECRET);
+        req.userId = response.userId;
         next();
-    } else {
+    } catch (error) {
         res.status(403).json({
             message: "Incorrect creds"
-        })
+        });
     }
 }
 
