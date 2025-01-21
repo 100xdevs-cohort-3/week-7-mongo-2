@@ -22,6 +22,7 @@ app.post("/signup", async (req, res) => {
       .min(5)
       .max(50)
       .regex(/[A-Z]/, "password must contain upper case letter")
+      .regex(/[a-z]/, "password must contain lower case letter")
       .regex(
         /[!@#$%^&*()_<>?:]/,
         "password must contain any special character"
